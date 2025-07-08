@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Speak Space</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-teal-100 via-indigo-100 to-purple-200 min-h-screen flex justify-center items-center">
+
+    <div class="w-full max-w-md p-6 rounded-lg shadow-lg bg-white">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-4">Welcome to My Speak Space!</h1>
+        
+        <div class="space-y-4">
+            <!-- User Input Section -->
+            <textarea id="userInput" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Type something..."></textarea>
+
+            <!-- Submit Button -->
+            <button onclick="respondToInput()" class="w-full py-2 px-4 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition duration-300">Send</button>
+
+            <!-- Response Display Section -->
+            <div id="responseOutput" class="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-md text-indigo-700">
+                <p>Your reply will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const responses = [
+            "Whatever happens, it is all for my benefit. Everything will work out in the end.",
+            "No matter the challenge, it’s all leading to something better.",
+            "Every obstacle is an opportunity to grow. Trust the process!",
+            "Sometimes life tests us, but rest assured, things will always improve.",
+            "All that happens is for a greater purpose. Stay hopeful, brighter days are ahead.",
+            "Everything unfolds perfectly in its own time. Keep going, you’ve got this!",
+            "Every experience, good or bad, brings us closer to where we’re meant to be.",
+            "The universe has a way of aligning things for the best outcome. Keep the faith.",
+            "Challenges are just stepping stones to something wonderful. Stay patient.",
+            "Life is a series of ups and downs, but trust that it will all come together beautifully.",
+            "Your journey is unfolding exactly as it should. Just stay positive and trust the flow.",
+            "Every situation is a lesson, and every lesson is a gift. You’re on the right path!",
+            "Keep believing, because what’s meant for you will always find its way.",
+            "Remember, the darkest nights bring the brightest stars. Stay strong!",
+            "Every twist and turn is preparing you for something amazing. Don’t worry, it’ll be okay.",
+            "Things may seem uncertain now, but soon everything will make sense.",
+            "Good things are on their way. Trust that the universe is always working in your favor.",
+            "Every setback is a setup for a major comeback. The best is yet to come!",
+            "Sometimes things need to fall apart before they come together. Keep your head up.",
+            "No matter what you face, it’s all shaping you for something greater. Believe in the process."
+        ];
+
+        function respondToInput() {
+            const input = document.getElementById('userInput').value;
+            const responseBox = document.getElementById('responseOutput');
+
+            if(input) {
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                responseBox.innerHTML = `<p><strong>Response:</strong> ${randomResponse}</p>`;
+            } else {
+                responseBox.innerHTML = "<p>Please type something to get a response!</p>";
+            }
+        }
+    </script>
+</body>
+</html>
