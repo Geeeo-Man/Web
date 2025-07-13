@@ -1,0 +1,54 @@
+<script>
+    // 替换成你的 DeepSeek API Key（https://platform.deepseek.com/）
+    const DEEPSEEK_API_KEY = "your-deepseek-api-key"; 
+
+    async function processText() {
+        const userInput = document.getElementById("userInput").value;
+        if (!userInput) {
+            alert("请输入内容！");
+            return;
+        }
+
+        document.getElementById("tags").innerHTML = "分析中...";
+        document.getElementById("summary").innerHTML = "分析中...";
+
+        try {
+            // 调用 DeepSeek API
+            const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sk-95693b4d7dc843778c55a7cb4636eef4}`
+                },
+                body: JSON.stringify({
+                    model: "deepseek-chat",  // DeepSeek 的模型
+                    messages: [
+                        {
+                            role: "user",
+                            content: `请完成以下任务：
+1. 为以下文本生成3个标签（格式：#标签1 #标签2 #标签3）：
+   "${userInput}"
+2. 用1句话总结主要内容。`
+                        }
+                    ]
+                })
+            });
+
+            const data = await response.json();
+            const aiResponse = data.choices[0].message.content;
+
+            // 提取标签和摘要
+            const tags = aiResponse.split("\n")[0].replace(/^[^#]+/, "");
+            const summary = aiResponse.split("\n")[1] || "无总结内容";
+
+            // 显示结果
+            document.getElementById("tags").innerHTML = tags.split(" ").map(tag => 
+                `<span class="tag">${tag}</span>`
+            ).join("");
+            document.getElementById("summary").innerHTML = summary;
+        } catch (error) {
+            alert("AI 分析失败，请检查 API Key 或网络！");
+            console.error(error);
+        }
+    }
+</script>
